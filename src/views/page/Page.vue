@@ -21,7 +21,7 @@
           <!-- 相册操作 -->
           <div class="page-opreation">
             <el-dropdown @command="handleCommand">
-              <i class="el-icon-more" style="color:#fff" />
+              <i class="el-icon-more" style="color: #fff" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="'update' + JSON.stringify(item)">
                   <i class="el-icon-edit" />编辑
@@ -42,14 +42,14 @@
       <div class="dialog-title-container" slot="title" ref="pageTitle" />
       <el-form label-width="80px" size="medium" :model="pageForum">
         <el-form-item label="页面名称">
-          <el-input style="width:220px" v-model="pageForum.pageName" />
+          <el-input style="width: 220px" v-model="pageForum.pageName" />
         </el-form-item>
         <el-form-item label="页面标签">
-          <el-input style="width:220px" v-model="pageForum.pageLabel" />
+          <el-input style="width: 220px" v-model="pageForum.pageLabel" />
         </el-form-item>
         <el-form-item label="页面封面">
           <el-upload
-            class="upload-cover"
+            class="upload-cover upload-img"
             drag
             :show-file-list="false"
             action="/api/admin/config/images"
@@ -72,22 +72,18 @@
       </el-form>
       <div slot="footer">
         <el-button @click="addOrEdit = false">取 消</el-button>
-        <el-button type="primary" @click="addOrEditPage">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="addOrEditPage"> 确 定 </el-button>
       </div>
     </el-dialog>
     <!-- 删除对话框 -->
     <el-dialog :visible.sync="isdeletePage" width="30%">
       <div class="dialog-title-container" slot="title">
-        <i class="el-icon-warning" style="color:#ff9900" />提示
+        <i class="el-icon-warning" style="color: #ff9900" />提示
       </div>
-      <div style="font-size:1rem">是否删除该页面？</div>
+      <div style="font-size: 1rem">是否删除该页面？</div>
       <div slot="footer">
         <el-button @click="isdeletePage = false">取 消</el-button>
-        <el-button type="primary" @click="deletePage">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="deletePage"> 确 定 </el-button>
       </div>
     </el-dialog>
   </el-card>
@@ -99,7 +95,7 @@ export default {
   created() {
     this.listPages();
   },
-  data: function() {
+  data: function () {
     return {
       keywords: "",
       loading: true,
@@ -114,7 +110,7 @@ export default {
         pageLabel: "",
         pageCover: ""
       },
-      pageList: []
+      pageList: [],
     };
   },
   methods: {
@@ -157,13 +153,13 @@ export default {
         if (data.flag) {
           this.$notify.success({
             title: "成功",
-            message: data.message
+            message: data.message,
           });
           this.listPages();
         } else {
           this.$notify.error({
             title: "失败",
-            message: data.message
+            message: data.message,
           });
         }
       });
@@ -173,14 +169,14 @@ export default {
       this.pageForum.pageCover = response.data;
     },
     beforeUpload(file) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (file.size / 1024 < this.config.UPLOAD_SIZE) {
           resolve(file);
         }
         // 压缩到200KB,这里的200就是要压缩的大小,可自定义
         imageConversion
           .compressAccurately(file, this.config.UPLOAD_SIZE)
-          .then(res => {
+          .then((res) => {
             resolve(res);
           });
       });
@@ -203,19 +199,19 @@ export default {
           if (data.flag) {
             this.$notify.success({
               title: "成功",
-              message: data.message
+              message: data.message,
             });
             this.listPages();
           } else {
             this.$notify.error({
               title: "失败",
-              message: data.message
+              message: data.message,
             });
           }
           this.isdeletePage = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -240,5 +236,11 @@ export default {
   z-index: 1000;
   top: 0.5rem;
   right: 0.8rem;
+}
+.upload-img {
+  width: auto;
+}
+.upload-img img{
+  width: 100%;
 }
 </style>
