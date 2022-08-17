@@ -147,6 +147,7 @@
         <!-- 导航父类 -->
         <el-form-item label="导航父类">
         <el-select v-model="navForm.parentId" placeholder="请选择">
+        <el-option label="无" value="0"></el-option>
           <el-option
             v-for="item in navList"
             :key="item.id"
