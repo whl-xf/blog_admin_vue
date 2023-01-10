@@ -12,20 +12,20 @@
         新增菜单
       </el-button>
       <!-- 数据筛选 -->
-      <div style="margin-left:auto">
+      <div style="margin-left: auto">
         <el-input
           v-model="keywords"
           prefix-icon="el-icon-search"
           size="small"
           placeholder="请输入菜单名"
-          style="width:200px"
+          style="width: 200px"
           @keyup.enter.native="listMenus"
         />
         <el-button
           type="primary"
           size="small"
           icon="el-icon-search"
-          style="margin-left:1rem"
+          style="margin-left: 1rem"
           @click="listMenus"
         >
           搜索
@@ -79,7 +79,7 @@
         width="150"
       >
         <template slot-scope="scope">
-          <i class="el-icon-time" style="margin-right:5px" />
+          <i class="el-icon-time" style="margin-right: 5px" />
           {{ scope.row.createTime | date }}
         </template>
       </el-table-column>
@@ -99,7 +99,7 @@
           </el-button>
           <el-popconfirm
             title="确定删除吗？"
-            style="margin-left:10px"
+            style="margin-left: 10px"
             @confirm="deleteMenu(scope.row.id)"
           >
             <el-button size="mini" type="text" slot="reference">
@@ -122,7 +122,7 @@
         </el-form-item>
         <!-- 菜单名称 -->
         <el-form-item label="菜单名称">
-          <el-input v-model="menuForm.name" style="width:220px" />
+          <el-input v-model="menuForm.name" style="width: 220px" />
         </el-form-item>
         <!-- 菜单图标 -->
         <el-form-item label="菜单图标">
@@ -143,17 +143,17 @@
               :prefix-icon="'iconfont ' + menuForm.icon"
               slot="reference"
               v-model="menuForm.icon"
-              style="width:220px"
+              style="width: 220px"
             />
           </el-popover>
         </el-form-item>
         <!-- 组件路径 -->
         <el-form-item label="组件路径" v-show="!isCatalog">
-          <el-input v-model="menuForm.component" style="width:220px" />
+          <el-input v-model="menuForm.component" style="width: 220px" />
         </el-form-item>
         <!-- 路由地址 -->
         <el-form-item label="访问路径">
-          <el-input v-model="menuForm.path" style="width:220px" />
+          <el-input v-model="menuForm.path" style="width: 220px" />
         </el-form-item>
         <!-- 显示排序 -->
         <el-form-item label="显示排序">
@@ -174,9 +174,7 @@
       </el-form>
       <div slot="footer">
         <el-button @click="addMenu = false">取 消</el-button>
-        <el-button type="primary" @click="saveOrUpdateMenu">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="saveOrUpdateMenu"> 确 定 </el-button>
       </div>
     </el-dialog>
   </el-card>
@@ -203,20 +201,50 @@ export default {
         path: "",
         orderNum: 1,
         parentId: null,
-        isHidden: 0
+        isHidden: 0,
       },
       iconList: [
-        "el-icon-myshouye",
+        "el-icon-myiconfontdongtaidianji",
+        "el-icon-myzhiding",
+        "el-icon-mypinglun",
+        "el-icon-mybiaoqing",
+        "el-icon-mytupian",
+        "el-icon-myfabusekuai",
+        "el-icon-mygongkai",
+        "el-icon-mycaogaoxiang",
+        "el-icon-myyemianpeizhi",
+        "el-icon-myjiekouguanli",
+        "el-icon-mydaohanglantubiao_quanxianguanli",
+        "el-icon-myhuishouzhan",
+        "el-icon-myzhaopian",
+        "el-icon-myFiles-59",
+        "el-icon-myimage-fill",
+        "el-icon-myjiaoseliebiao",
+        "el-icon-mycaozuorizhi",
+        "el-icon-mycaidan",
         "el-icon-myfabiaowenzhang",
+        "el-icon-mywenzhangliebiao",
         "el-icon-myyonghuliebiao",
         "el-icon-myxiaoxi",
         "el-icon-myliuyan",
+        "el-icon-myfenlei",
         "el-icon-myshouye",
-        "el-icon-myfabiaowenzhang",
-        "el-icon-myyonghuliebiao",
-        "el-icon-myxiaoxi",
-        "el-icon-myliuyan"
-      ]
+        "el-icon-mywendang",
+        "el-icon-myxitong",
+        "el-icon-mypinglunzu",
+        "el-icon-myshezhi",
+        "el-icon-mydashujukeshihuaico-",
+        "el-icon-myicontag",
+        "el-icon-myliebiao",
+        "el-icon-myuser",
+        "el-icon-myfangwenliang",
+        "el-icon-mymima",
+        "el-icon-mytuichu",
+        "el-icon-myicwindowzoom48px",
+        "el-icon-mydianzan",
+        "el-icon-mywenzhang-copy",
+        "el-icon-myguanyuwo"
+      ],
     };
   },
   methods: {
@@ -224,8 +252,8 @@ export default {
       this.axios
         .get("/api/admin/menus", {
           params: {
-            keywords: this.keywords
-          }
+            keywords: this.keywords,
+          },
         })
         .then(({ data }) => {
           this.menuList = data.data;
@@ -246,7 +274,7 @@ export default {
               path: "",
               orderNum: 1,
               parentId: null,
-              isHidden: 0
+              isHidden: 0,
             };
             this.$refs.menuTitle.innerHTML = "新增菜单";
             this.menuForm.parentId = JSON.parse(JSON.stringify(menu.id));
@@ -267,7 +295,7 @@ export default {
           path: "",
           orderNum: 1,
           parentId: null,
-          isHidden: 0
+          isHidden: 0,
         };
       }
       this.addMenu = true;
@@ -296,13 +324,13 @@ export default {
         if (data.flag) {
           this.$notify.success({
             title: "成功",
-            message: "操作成功"
+            message: "操作成功",
           });
           this.listMenus();
         } else {
           this.$notify.error({
             title: "失败",
-            message: "操作失败"
+            message: "操作失败",
           });
         }
         this.addMenu = false;
@@ -313,18 +341,18 @@ export default {
         if (data.flag) {
           this.$notify.success({
             title: "成功",
-            message: "删除成功"
+            message: "删除成功",
           });
           this.listMenus();
         } else {
           this.$notify.error({
             title: "失败",
-            message: data.message
+            message: data.message,
           });
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
